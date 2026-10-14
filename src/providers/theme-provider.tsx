@@ -38,7 +38,8 @@ function applyThemeToDocument(resolved: ResolvedTheme) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
+  // Default theme is "light" until the user picks something else.
+  const [theme, setThemeState] = useState<Theme>("light");
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
   const [mounted, setMounted] = useState(false);
 
@@ -49,7 +50,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       if (stored === "light" || stored === "dark" || stored === "system") {
         setThemeState(stored);
       } else {
-        setThemeState("system");
+        setThemeState("light");
       }
     } catch {
       // Ignore localStorage access errors
@@ -98,7 +99,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <ThemeContext.Provider
       value={{
-        theme: mounted ? theme : "system",
+        theme: mounted ? theme : "light",
         resolvedTheme: mounted ? resolvedTheme : "light",
         setTheme,
       }}
