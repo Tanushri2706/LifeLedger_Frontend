@@ -3,9 +3,11 @@ import type { NextConfig } from "next";
 function buildCspHeader(): string {
   const isProd = process.env.NODE_ENV === "production";
 
+  // Relative API URLs (e.g. "/api/v1") go through the Next.js rewrite and are
+  // covered by 'self', so only absolute URLs need their own connect-src entry.
   const apiOrigin = (() => {
     const raw = process.env.NEXT_PUBLIC_API_URL;
-    if (!raw) return null;
+    if (!raw || raw.startsWith("/")) return null;
     try {
       const parsed = new URL(raw.startsWith("http") ? raw : `https://${raw}`);
       return parsed.origin;
@@ -100,6 +102,19 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+    ];
+  },
+  // Proxy API calls through the frontend domain so the refresh-token cookie
+  // is first-party (works in Brave/Safari). BACKEND_URL is server-side only.
+  async rewrites() {
+    const backendUrl = (
+      process.env.BACKEND_URL || "http://localhost:5000"
+    ).replace(/\/$/, "");
+    return [
+      {
+        source: "/api/v1/:path*",
+        destination: `${backendUrl}/api/v1/:path*`,
       },
     ];
   },
