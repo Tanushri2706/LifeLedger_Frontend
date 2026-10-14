@@ -1,0 +1,37 @@
+# LifeLedger Robots Configuration
+User-agent: *
+
+# Disallow private authenticated portal routes
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /reports
+Disallow: /reports/
+Disallow: /timeline
+Disallow: /timeline/
+Disallow: /family
+Disallow: /family/
+Disallow: /profile
+Disallow: /profile/
+Disallow: /settings
+Disallow: /settings/
+Disallow: /appointments
+Disallow: /appointments/
+Disallow: /prescriptions
+Disallow: /prescriptions/
+Disallow: /doctor
+Disallow: /doctor/
+Disallow: /emergency-hub
+Disallow: /emergency-hub/
+Disallow: /emergency/
+Disallow: /medical-share/
+
+# Allow public discovery and authentication entry points
+Allow: /
+Allow: /doctors
+Allow: /doctors/
+Allow: /hospitals
+Allow: /hospitals/
+Allow: /ambulances
+Allow: /ambulances/
+Allow: /ambulance
+Allow: /auth/
