@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LifeLedger Health OS
 
 Act as a Senior Software Architect and Product Manager.
@@ -74,3 +75,6 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+=======
+# LifeLedger_Frontend
+>>>>>>> b0c38e6ac44c1b53e26f849b4c7a825e62fe42d3
